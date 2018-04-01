@@ -46,7 +46,7 @@
   "license": "MIT",
   "main": "lib/index.js",
   "module": "es/index.js",
-  "name": "@planttheidea/isifier",
+  "name": "isifier",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/planttheidea/isifier.git"
