@@ -1,0 +1,76 @@
+{
+  "author": "planttheidea",
+  "ava": {
+    "babel": "inherit",
+    "failFast": true,
+    "files": ["./test/index.js"],
+    "require": ["babel-register"],
+    "verbose": true
+  },
+  "bugs": {
+    "url": "https://github.com/planttheidea/isifier/issues"
+  },
+  "description": "Create objects with no inhereted prototype",
+  "devDependencies": {
+    "ava": "0.25.0",
+    "babel-cli": "6.26.0",
+    "babel-core": "^6.26.0",
+    "babel-eslint": "8.2.2",
+    "babel-loader": "7.1.4",
+    "babel-plugin-add-module-exports": "0.2.1",
+    "babel-polyfill": "6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-react": "6.24.1",
+    "babel-preset-stage-2": "6.24.1",
+    "babel-register": "6.26.0",
+    "eslint": "4.19.1",
+    "eslint-config-rapid7": "^2.11.1",
+    "eslint-friendly-formatter": "4.0.0",
+    "eslint-loader": "2.0.0",
+    "html-webpack-plugin": "3.1.0",
+    "in-publish": "^2.0.0",
+    "nyc": "^11.6.0",
+    "optimize-js-plugin": "^0.0.4",
+    "react": "16.2.0",
+    "react-dom": "16.2.0",
+    "rimraf": "^2.6.2",
+    "rollup": "^0.57.1",
+    "rollup-plugin-babel": "^3.0.3",
+    "rollup-plugin-uglify": "^3.0.0",
+    "webpack": "4.3.0",
+    "webpack-cli": "^2.0.13",
+    "webpack-dev-server": "3.1.1"
+  },
+  "homepage": "https://github.com/planttheidea/isifier#readme",
+  "keywords": ["object", "prototype", "pure"],
+  "license": "MIT",
+  "main": "lib/index.js",
+  "module": "es/index.js",
+  "name": "@planttheidea/isifier",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/planttheidea/isifier.git"
+  },
+  "scripts": {
+    "benchmark": "npm run transpile:lib && NODE_ENV=production node ./benchmarks/index.js",
+    "build": "NODE_ENV=production rollup -c",
+    "clean": "npm run clean:lib && npm run clean:es && npm run clean:dist",
+    "clean:dist": "rimraf dist",
+    "clean:lib": "rimraf lib",
+    "clean:es": "rimraf es",
+    "dev": "NODE_ENV=development webpack-dev-server --colors --progress --config=webpack/webpack.config.dev.js",
+    "dist": "npm run clean:dist && npm run build",
+    "lint": "NODE_ENV=test eslint src",
+    "lint:fix": "NODE_ENV=test eslint src --fix",
+    "prepublish": "if in-publish; then npm run prepublish:compile; fi",
+    "prepublish:compile":
+      "npm run lint && npm run test:coverage && npm run transpile:lib && npm run transpile:es && npm run dist",
+    "start": "npm run dev",
+    "test": "NODE_PATH=. NODE_ENV=production BABEL_ENV=test ava",
+    "test:coverage": "nyc npm test",
+    "test:watch": "npm test -- --watch",
+    "transpile:lib": "npm run clean:lib && BABEL_ENV=lib babel src --out-dir lib",
+    "transpile:es": "npm run clean:es && BABEL_ENV=es babel src --out-dir es"
+  },
+  "version": "1.0.0"
+}
