@@ -1,44 +1,47 @@
 /**
- * @constant {Object} is the namespace for all validity checks
+ * @function createInstance
+ *
+ * @description
+ * create a new isifier instance
+ *
+ * @returns {Object} the isifier instance
  */
-const is = Object.create({
+export const createInstance = () => {
   /**
-   * @function addTest
-   *
-   * @description
-   * add a new test to the is namespace
-   *
-   * @param {string} name the name of the new validation method
-   * @param {function(...Array<any>): boolean} validator the method to test validation of
+   * @constant {Object} is the namespace for all validity checks
    */
-  addTest(name, validator) {
-    is[name] = validator;
+  const is = Object.create({
+    addTest(name, validator) {
+      is[name] = validator;
 
-    if (validator.length === 1) {
-      is.all[name] = function() {
-        for (let index = 0; index < arguments.length; index++) {
-          if (!validator(arguments[index])) {
-            return false;
+      if (validator.length === 1) {
+        is.all[name] = function() {
+          for (let index = 0; index < arguments.length; index++) {
+            if (!validator(arguments[index])) {
+              return false;
+            }
           }
-        }
 
-        return true;
-      };
+          return true;
+        };
 
-      is.any[name] = function() {
-        for (let index = 0; index < arguments.length; index++) {
-          if (validator(arguments[index])) {
-            return true;
+        is.any[name] = function() {
+          for (let index = 0; index < arguments.length; index++) {
+            if (validator(arguments[index])) {
+              return true;
+            }
           }
-        }
 
-        return false;
-      };
+          return false;
+        };
+      }
     }
-  }
-});
+  });
 
-is.all = {};
-is.any = {};
+  is.all = {};
+  is.any = {};
 
-export default is;
+  return is;
+};
+
+export default createInstance();

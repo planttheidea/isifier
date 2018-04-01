@@ -7,6 +7,8 @@ A validation library creator
 * [Summary](#summary)
 * [Usage](#usage)
   * [addTest](#addtest)
+* [Other methods](#other-methods)
+  * [createInstance](#createinstance)
 * [Browser support](#browser-support)
 * [Development](#development)
 
@@ -14,7 +16,7 @@ A validation library creator
 
 We all have seen a thousand validation libraries out there, but there is something they all have in common: they have way, way more tests than your project could ever need. All you need to do is validate strings, and you pull in something that validates social security numbers, canadian zip codes, and IPV6 addresses, which adds excess bloat to your application without any additional benefit.
 
-With `isifier`, the library is only as targeted as you need it to be, as all it does is create a namespace for your tests and a method to add to it. It is _411 bytes_ minified and gzipped.
+With `isifier`, the library is only as targeted as you need it to be, as all it does is create a namespace for your tests and a method to add to it. It is _440 bytes_ minified and gzipped.
 
 ## Usage
 
@@ -58,6 +60,27 @@ console.log(
 _is.addTest(name: string, validator: function): boolean_
 
 Adds a new validator test to the `is` object, accessible on all uses of `is` from that point on.
+
+## Other methods
+
+#### createInstance
+
+Create a unique instance of `isifier`. Useful if you want to avoid collisions with other library applications.
+
+```javascript
+import is, { createInstance } from "isifier";
+
+is.addTest("number", value => typeof value === "number");
+
+const instance = createInstance();
+
+console.log(instance === is); // false
+
+instance.addTest("number", value => typeof value === "number" && !isNaN(value));
+
+console.log(is.number(NaN)); // true
+console.log(instance.number(NaN)); // false
+```
 
 ## Browser support
 

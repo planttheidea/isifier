@@ -2,7 +2,7 @@
 import test from 'ava';
 
 // src
-import is from 'src/index';
+import is, {createInstance} from 'src/index';
 
 test('if the only default properties on the object is "all" and "any"', (t) => {
   t.deepEqual(is, {
@@ -46,4 +46,14 @@ test('if addTest will not create a custom validator for all and any if the funct
 
   t.false(is.all.hasOwnProperty('custom'));
   t.false(is.any.hasOwnProperty('custom'));
+});
+
+test('if createInstance will create an isolated instance of the is object', (t) => {
+  const instance = createInstance();
+
+  t.is(typeof instance.addTest, 'function');
+  t.true(instance.hasOwnProperty('all'));
+  t.true(instance.hasOwnProperty('any'));
+
+  t.not(instance, is);
 });
