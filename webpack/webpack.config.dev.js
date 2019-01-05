@@ -1,15 +1,13 @@
-"use strict";
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const path = require('path');
 
-const HtmlWebpackPlugin = require("html-webpack-plugin");
-const path = require("path");
+const defaultConfig = require('./webpack.config');
 
-const defaultConfig = require("./webpack.config");
-
-const ROOT = path.resolve(__dirname, "..");
+const ROOT = path.resolve(__dirname, '..');
 
 module.exports = Object.assign({}, defaultConfig, {
   devServer: {
-    contentBase: "./dist",
+    contentBase: './dist',
     inline: true,
     port: 3000,
     stats: {
@@ -23,13 +21,13 @@ module.exports = Object.assign({}, defaultConfig, {
     }
   },
 
-  entry: path.join(ROOT, "DEV_ONLY/App.js"),
+  entry: path.join(ROOT, 'DEV_ONLY/App.js'),
 
   externals: undefined,
 
   module: Object.assign({}, defaultConfig.module, {
-    rules: defaultConfig.module.rules.map(rule => {
-      if (rule.loader === "eslint-loader") {
+    rules: defaultConfig.module.rules.map((rule) => {
+      if (rule.loader === 'eslint-loader') {
         return Object.assign({}, rule, {
           options: Object.assign({}, rule.options, {
             emitError: undefined,
@@ -38,10 +36,10 @@ module.exports = Object.assign({}, defaultConfig, {
         });
       }
 
-      if (rule.loader === "babel-loader") {
+      if (rule.loader === 'babel-loader') {
         return Object.assign({}, rule, {
           options: Object.assign({}, rule.options, {
-            presets: ["react"]
+            presets: ['react']
           })
         });
       }

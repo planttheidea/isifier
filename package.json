@@ -3,8 +3,12 @@
   "ava": {
     "babel": "inherit",
     "failFast": true,
-    "files": ["./test/index.js"],
-    "require": ["babel-register"],
+    "files": [
+      "./test/index.js"
+    ],
+    "require": [
+      "babel-register"
+    ],
     "verbose": true
   },
   "bugs": {
@@ -37,12 +41,16 @@
     "rollup": "^0.57.1",
     "rollup-plugin-babel": "^3.0.3",
     "rollup-plugin-uglify": "^3.0.0",
-    "webpack": "4.3.0",
-    "webpack-cli": "^2.0.13",
-    "webpack-dev-server": "3.1.1"
+    "webpack": "4.28.3",
+    "webpack-cli": "^3.2.0",
+    "webpack-dev-server": "3.1.14"
   },
   "homepage": "https://github.com/planttheidea/isifier#readme",
-  "keywords": ["object", "prototype", "pure"],
+  "keywords": [
+    "object",
+    "prototype",
+    "pure"
+  ],
   "license": "MIT",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -63,8 +71,7 @@
     "lint": "NODE_ENV=test eslint src",
     "lint:fix": "NODE_ENV=test eslint src --fix",
     "prepublish": "if in-publish; then npm run prepublish:compile; fi",
-    "prepublish:compile":
-      "npm run lint && npm run test:coverage && npm run transpile:lib && npm run transpile:es && npm run dist",
+    "prepublish:compile": "npm run lint && npm run test:coverage && npm run transpile:lib && npm run transpile:es && npm run dist",
     "start": "npm run dev",
     "test": "NODE_PATH=. NODE_ENV=production BABEL_ENV=test ava",
     "test:coverage": "nyc npm test",
