@@ -1,17 +1,15 @@
-"use strict";
+const webpack = require('webpack');
+const OptimizeJsPlugin = require('optimize-js-plugin');
 
-const webpack = require("webpack");
-const OptimizeJsPlugin = require("optimize-js-plugin");
-
-const defaultConfig = require("./webpack.config");
+const defaultConfig = require('./webpack.config');
 
 module.exports = Object.assign({}, defaultConfig, {
   devtool: undefined,
 
-  mode: "production",
+  mode: 'production',
 
   output: Object.assign({}, defaultConfig.output, {
-    filename: "is.min.js"
+    filename: 'is.min.js'
   }),
 
   plugins: defaultConfig.plugins.concat([

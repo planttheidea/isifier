@@ -1,46 +1,44 @@
-"use strict";
+const path = require('path');
+const webpack = require('webpack');
 
-const path = require("path");
-const webpack = require("webpack");
-
-const ROOT = path.resolve(__dirname, "..");
+const ROOT = path.resolve(__dirname, '..');
 
 module.exports = {
-  devtool: "#source-map",
+  devtool: '#source-map',
 
-  entry: path.join(ROOT, "src/index.js"),
+  entry: path.join(ROOT, 'src/index.js'),
 
-  mode: "development",
+  mode: 'development',
 
   module: {
     rules: [
       {
-        enforce: "pre",
-        include: [path.resolve(ROOT, "src")],
+        enforce: 'pre',
+        include: [path.resolve(ROOT, 'src')],
         options: {
           emitError: true,
           failOnError: true,
           failOnWarning: true,
-          formatter: require("eslint-friendly-formatter")
+          formatter: require('eslint-friendly-formatter')
         },
-        loader: "eslint-loader",
+        loader: 'eslint-loader',
         test: /\.js$/
       },
       {
-        include: [path.resolve(ROOT, "src"), /DEV_ONLY/],
-        loader: "babel-loader",
+        include: [path.resolve(ROOT, 'src'), /DEV_ONLY/],
+        loader: 'babel-loader',
         test: /\.js$/
       }
     ]
   },
 
   output: {
-    filename: "is.js",
-    library: "is",
-    libraryTarget: "umd",
-    path: path.resolve(ROOT, "dist"),
+    filename: 'is.js',
+    library: 'is',
+    libraryTarget: 'umd',
+    path: path.resolve(ROOT, 'dist'),
     umdNamedDefine: true
   },
 
-  plugins: [new webpack.EnvironmentPlugin(["NODE_ENV"])]
+  plugins: [new webpack.EnvironmentPlugin(['NODE_ENV'])]
 };
